@@ -16,13 +16,7 @@ They will:
 // 📦 Starting Dataset: Product List
 // ============================================
 
-const products = [
-  { name: "Laptop", price: 1000, inStock: true },
-  { name: "Phone", price: 500, inStock: false },
-  { name: "Tablet", price: 800, inStock: true },
-  { name: "Monitor", price: 300, inStock: true },
-  { name: "Keyboard", price: 100, inStock: false },
-];
+
 
 // ============================================
 // 🔧 Tasks
@@ -91,3 +85,47 @@ Step-by-Step:
 // console.log("Uppercased names:", ...);
 // console.log("Discounted products:", ...);
 // console.log("Total value in stock:", ...);
+
+const products = [
+  { name: "Laptop", price: 1000, inStock: true },
+  { name: "Phone", price: 500, inStock: false },
+  { name: "Tablet", price: 800, inStock: true },
+  { name: "Monitor", price: 300, inStock: true },
+  { name: "Keyboard", price: 100, inStock: false },
+];
+
+// Task 1: Filter Products by Availability //
+
+function filterInStockProducts(products, callBack){
+  return products.filter(callBack);
+}
+console.log("In-Stock Products: ", filterInStockProducts(products, availability => availability.inStock === true));
+
+
+// Task 2: Transform Product Names //
+
+  let nameChange = products.map(({name}) => name.toUpperCase());
+  console.log(`Uppercased names: ${nameChange}`);
+  
+
+// Task 3: Generate Discounted Prices //
+
+function applyDiscount(discountPercent) {
+  return products.map((product) => product.price * (1 - discountPercent));
+  }
+  console.log(`Discounted Products: ${applyDiscount(.25)}`);
+
+/*
+  function applyDiscount(discountPercent){
+    return function discount(product){
+     return product.price * (1 - discountPercent);
+    }
+  }
+  console.log("Discounted Products: ", products.map(applyDiscount(discount)));
+*/
+
+// Task 4: Calculate Total Inventory Value //
+
+let totalValue = products.filter((item) => item.inStock).reduce((total, item) => total + item.price, 0);
+
+console.log(`Total value in stock: ${totalValue}`);
